@@ -1,6 +1,6 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
-    <div class="col-span-7 text-center" :class="border">{{ month }}</div>
+    <div class="col-span-7 text-center" :class="border">{{ month }} <template v-if="showYear">{{year}}</template></div>
     <div
       v-for="(weekday, i) in weekdays"
       :key="i"
@@ -35,6 +35,10 @@ export default {
     date: Object,
     allDays: {
       type: Boolean,
+      default: false,
+    },
+    showYear: {
+      type: Boolean,
       default: true,
     },
   },
@@ -47,6 +51,9 @@ export default {
   computed: {
     base() {
       return new Date(this.date.getFullYear(), this.date.getMonth());
+    },
+    year() {
+      return this.date.getFullYear();
     },
     month() {
       return new Intl.DateTimeFormat("default", options).format(this.date);
