@@ -1,12 +1,12 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
-    <div class="col-span-7 text-center" :class="border">{{ month }} <template v-if="showYear">{{year}}</template></div>
+    <div class="col-span-7 text-center" :class="border">{{ month }} <template v-if="!hideYear">{{year}}</template></div>
     <div
       v-for="(weekday, i) in weekdays"
       :key="i"
       class="text-center" :class="border"
     >
-      {{ weekday }}
+      {{ abbrDay ? weekday.slice(0, 3): weekday }}
     </div>
     <div
       v-for="(date, i) in days"
@@ -32,19 +32,30 @@ const options: object = { month: "long" };
 
 export default {
   props: {
-    date: Object,
-    allDays: {
+    date: {
+      type: Object,
+      required: true
+    },
+    allDates: {
       type: Boolean,
       default: false,
     },
-    showYear: {
+    hideYear: {
       type: Boolean,
-      default: true,
+      default: false,
     },
+    abbrDay: {
+      type: Boolean,
+      default: false,
+    },
+    forceFive: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
-      border: 'border border-black dark:border-white',
+      border: 'border border-current',
       weekdays: weekdays,
     };
   },
@@ -63,7 +74,7 @@ export default {
       const month: number = new Date(this.base).getMonth();
       let slots: any[] = [];
       for (let i = this.base.getDay(); i > 0; i--) {
-        if (this.allDays) {
+        if (this.allDates) {
           let s = new Date(d);
           s.setDate(s.getDate() - i);
           slots.push(s.getDate());
@@ -76,8 +87,8 @@ export default {
         d.setDate(d.getDate() + 1);
       }
       let q = d.getDay() - 1;
-      while (d.getDay() > q) {
-         if (this.allDays) {
+      while (q > -1 && d.getDay() > q) {
+         if (this.allDates) {
           slots.push(d.getDate());
         } else {
           slots.push("");
