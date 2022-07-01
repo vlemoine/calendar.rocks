@@ -12,13 +12,13 @@
       {{ abbrDay ? weekday.slice(0, 3) : weekday }}
     </div>
     <div
-      v-for="(date, i) in days"
+      v-for="(date, i) in dates"
       :key="i"
-      class="p-2 relative"
+      class="px-2 py-1 relative flex"
       :class="[
         border,
         text(i),
-        forceFive && days.length > 35
+        forceFive && dates.length > 35
           ? i > 27
             ? 'row-span-2'
             : 'row-span-4'
@@ -30,12 +30,26 @@
         },
       ]"
     >
-      <span v-if="date !== ''" :class="{'absolute bottom-2': forceFive && i > 34}">{{ date }}</span>
+      <span
+        v-if="
+          date.current ||
+          (allDates && !forceFive) ||
+          (allDates && forceFive && i < 35)
+        "
+        :class="[
+          today(date),
+          {
+            'absolute bottom-2': forceFive && i > 34,
+          },
+        ]"
+        >{{ date.date }}
+      </span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+const today: Date = new Date();
 const weekdays: string[] = [
   "Sunday",
   "Monday",
@@ -46,7 +60,6 @@ const weekdays: string[] = [
   "Saturday",
 ];
 const options: object = { month: "long" };
-
 export default {
   props: {
     date: {
@@ -61,6 +74,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    // TODO: week view: 5, 6, auto
     forceFive: {
       type: Boolean,
       default: false,
@@ -76,45 +90,44 @@ export default {
     base() {
       return new Date(this.date.getFullYear(), this.date.getMonth());
     },
-    year() {
-      return this.date.getFullYear();
-    },
-    month() {
-      return new Intl.DateTimeFormat("default", options).format(this.date);
-    },
-    days() {
+    dates() {
       let d = new Date(this.base);
       const month: number = new Date(this.base).getMonth();
       let slots: any[] = [];
       for (let i = this.base.getDay(); i > 0; i--) {
-        if (this.allDates) {
-          let s = new Date(d);
-          s.setDate(s.getDate() - i);
-          slots.push(s.getDate());
-        } else {
-          slots.push("");
-        }
+        let s = new Date(d);
+        s.setDate(s.getDate() - i);
+        slots.push({ obj: s, date: s.getDate(), current: false });
       }
       while (d.getMonth() === month) {
-        slots.push(d.getDate());
+        let s = new Date(d);
+        slots.push({ obj: s, date: s.getDate(), current: true });
         d.setDate(d.getDate() + 1);
       }
       let q = d.getDay() - 1;
       while (q > -1 && d.getDay() > q) {
-        if (this.allDates && !this.forceFive) {
-          slots.push(d.getDate());
-        } else {
-          slots.push("");
-        }
+        let s = new Date(d);
+        slots.push({ obj: s, date: s.getDate(), current: false });
         d.setDate(d.getDate() + 1);
       }
       return slots;
     },
+    month() {
+      return new Intl.DateTimeFormat("default", options).format(this.date);
+    },
+    year() {
+      return this.date.getFullYear();
+    },
   },
   methods: {
     text(i) {
-      return this.forceFive && i > 34 ? 'text-left': 'text-right'
-    }
-  }
+      return this.forceFive && i > 34 ? "" : "items-start justify-end";
+    },
+    today(date) {
+      return date.obj.toDateString() === today.toDateString()
+        ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black aspect-square h-6 grid place-items-center -mr-1 rounded-full print:text-current"
+        : "";
+    },
+  },
 };
 </script>

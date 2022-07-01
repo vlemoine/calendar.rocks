@@ -32,7 +32,12 @@
         v-model="forceFive"
       /><label for="forceFive">Force five week view</label>
     </div>
-    <Month :date="date" :allDates="allDates" :abbrDay="abbrDay" :forceFive="forceFive"></Month>
+    <Month
+      :date="date"
+      :allDates="allDates"
+      :abbrDay="abbrDay"
+      :forceFive="forceFive"
+    ></Month>
   </NuxtLayout>
 </template>
 
