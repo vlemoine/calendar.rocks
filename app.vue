@@ -2,17 +2,6 @@
   <NuxtLayout>
     <!-- Color mode: {{ $colorMode.value }} -->
     <div class="print:hidden">
-      <select name="months" v-model="selectedMonth" class="bg-transparent">
-        <option v-for="(month, i) in months" :key="i" :value="i">
-          {{ month }}
-        </option>
-      </select>
-      <input
-        type="number"
-        min="1900"
-        v-model="selectedYear"
-        class="bg-transparent"
-      />
       <input
         type="checkbox"
         name="allDates"
@@ -36,6 +25,11 @@
           {{ op }}
         </option>
       </select>
+      <div style="flex gap-2">
+        <button @click="prevMonth()">prev</button>
+        <button @click="goToToday()">today</button>
+        <button @click="nextMonth()">next</button>
+      </div>
     </div>
     <Month
       :date="date"
@@ -43,7 +37,19 @@
       :abbrDay="abbrDay"
       :forceFive="forceFive"
       :monthPos="monthPos"
-    ></Month>
+    >
+    <select name="months" v-model="selectedMonth" class="bg-transparent font-bold print:hidden w-fit">
+        <option v-for="(month, i) in months" :key="i" :value="i">
+          {{ month }}
+        </option>
+      </select>
+      <input
+        type="number"
+        min="1900"
+        v-model="selectedYear"
+        class="bg-transparent print:hidden w-[5ch]"
+      />
+    </Month>
   </NuxtLayout>
 </template>
 
@@ -73,10 +79,25 @@ const monthPos = ref("center");
 const date = computed(() => {
   let d = new Date();
   d.setDate(1);
-  d.setMonth(selectedMonth.value);
   d.setFullYear(selectedYear.value);
+  d.setMonth(selectedMonth.value);
   return d;
 });
+function nextMonth() {
+  selectedMonth.value++;
+  selectedYear.value = date.value.getFullYear();
+  selectedMonth.value = selectedMonth.value % 12;
+}
+function prevMonth() {
+  selectedMonth.value--;
+  selectedYear.value = date.value.getFullYear();
+  if (selectedMonth.value < 0)
+    selectedMonth.value = (selectedMonth.value + 12) % 12;
+}
+function goToToday() {
+  selectedMonth.value = new Date().getMonth();
+  selectedYear.value = new Date().getFullYear();
+}
 </script>
 
 <style>
