@@ -1,7 +1,10 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
-    <div class="col-span-7 text-center" :class="border">
-      {{ month }} {{ year }}
+    <div
+      class="col-span-7 text-center flex items-center px-4 gap-1 text-2xl"
+      :class="[border, displayMonth]"
+    >
+      <span class="font-bold">{{ month }}</span> {{ year }}
     </div>
     <div
       v-for="(weekday, i) in weekdays"
@@ -20,9 +23,9 @@
         text(i),
         forceFive && dates.length > 35
           ? i > 27
-            ? 'row-span-2'
-            : 'row-span-4'
-          : 'row-span-4',
+            ? 'row-span-3'
+            : 'row-span-6'
+          : 'row-span-6',
         {
           end: i % 7 === 6,
           'border-b-0 pb-0': forceFive && i > 27 && i < 35,
@@ -40,6 +43,7 @@
           today(date),
           {
             'absolute bottom-2': forceFive && i > 34,
+            'opacity-50': !date.current,
           },
         ]"
         >{{ date.date }}
@@ -79,6 +83,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    monthPos: {
+      type: String,
+      default: "center",
+    },
   },
   data() {
     return {
@@ -117,6 +125,13 @@ export default {
     },
     year() {
       return this.date.getFullYear();
+    },
+    displayMonth() {
+      return this.monthPos === "center"
+        ? "justify-center"
+        : this.monthPos === "right"
+        ? "justify-end"
+        : "";
     },
   },
   methods: {

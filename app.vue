@@ -31,12 +31,18 @@
         id="forceFive"
         v-model="forceFive"
       /><label for="forceFive">Force five week view</label>
+      <select name="monthPos" v-model="monthPos" class="bg-transparent">
+        <option v-for="(op, i) in monthPosOptions" :key="i" :value="op">
+          {{ op }}
+        </option>
+      </select>
     </div>
     <Month
       :date="date"
       :allDates="allDates"
       :abbrDay="abbrDay"
       :forceFive="forceFive"
+      :monthPos="monthPos"
     ></Month>
   </NuxtLayout>
 </template>
@@ -57,11 +63,13 @@ const months = [
   "November",
   "December",
 ];
+const monthPosOptions = ["left", "center", "right"];
 const selectedMonth = ref(new Date().getMonth());
 const selectedYear = ref(new Date().getFullYear());
 const allDates = ref(false);
 const abbrDay = ref(false);
 const forceFive = ref(false);
+const monthPos = ref("center");
 const date = computed(() => {
   let d = new Date();
   d.setDate(1);
