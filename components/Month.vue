@@ -1,6 +1,6 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
-    <div class="col-span-7 text-center" :class="border">{{ month }} <template v-if="!hideYear">{{year}}</template></div>
+    <div class="col-span-7 text-center" :class="border">{{ month }} {{year}}</div>
     <div
       v-for="(weekday, i) in weekdays"
       :key="i"
@@ -37,10 +37,6 @@ export default {
       required: true
     },
     allDates: {
-      type: Boolean,
-      default: false,
-    },
-    hideYear: {
       type: Boolean,
       default: false,
     },

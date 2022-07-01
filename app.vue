@@ -20,17 +20,11 @@
     /><label for="allDates">View all dates</label>
     <input
       type="checkbox"
-      name="hideYear"
-      id="hideYear"
-      v-model="hideYear"
-    /><label for="hideYear">Hide year</label>
-    <input
-      type="checkbox"
       name="abbrDay"
       id="abbrDay"
       v-model="abbrDay"
     /><label for="abbrDayr">Abbreviate day</label>
-    <Month :date="date" :allDates="allDates" :hideYear="hideYear" :abbrDay="abbrDay"></Month>
+    <Month :date="date" :allDates="allDates" :abbrDay="abbrDay"></Month>
   </NuxtLayout>
 </template>
 
@@ -53,9 +47,7 @@ const months = [
 const selectedMonth = ref(new Date().getMonth());
 const selectedYear = ref(new Date().getFullYear());
 const allDates = ref(false);
-const hideYear = ref(false);
 const abbrDay = ref(false);
-// a computed ref
 const date = computed(() => {
   let d = new Date();
   d.setDate(1);
