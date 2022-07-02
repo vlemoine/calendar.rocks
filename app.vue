@@ -1,7 +1,8 @@
 <template>
   <NuxtLayout>
     <!-- Color mode: {{ $colorMode.value }} -->
-    <div class="print:hidden">
+    <div class="print:hidden flex items-center">
+      <i class="fa-solid fa-gear"></i>
       <input
         type="checkbox"
         name="allDates"
@@ -25,10 +26,10 @@
           {{ op }}
         </option>
       </select>
-      <div style="flex gap-2">
-        <button @click="prevMonth()">prev</button>
-        <button @click="goToToday()">today</button>
-        <button @click="nextMonth()">next</button>
+      <div class="ml-auto flex gap-2">
+        <Button @click="prevMonth()">prev</Button>
+        <Button @click="goToToday()">today</Button>
+        <Button @click="nextMonth()">next</Button>
       </div>
     </div>
     <Month
