@@ -1,0 +1,5 @@
+# check that mod_mime is enabled
+<IfModule mod_mime.c>
+    # add support for ECMAScript modules
+    AddType text/javascript js mjs
+</IfModule>
