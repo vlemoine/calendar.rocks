@@ -1,3 +1,3 @@
 <template>
-  <button class="p-2 rounded"><slot></slot></button>
+  <button class="px-2 py-1 rounded"><slot></slot></button>
 </template>

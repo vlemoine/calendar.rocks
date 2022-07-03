@@ -1,8 +1,9 @@
 <template>
   <NuxtLayout>
+    <Body class="dark:bg-gray-900 text-black/80 dark:text-white"></Body>
     <!-- Color mode: {{ $colorMode.value }} -->
     <div class="print:hidden flex items-center">
-      <i class="fa-solid fa-gear"></i>
+      <font-awesome-icon icon="fa-solid fa-gear" />
       <input
         type="checkbox"
         name="allDates"
@@ -27,9 +28,9 @@
         </option>
       </select>
       <div class="ml-auto flex gap-2">
-        <Button @click="prevMonth()">prev</Button>
-        <Button @click="goToToday()">today</Button>
-        <Button @click="nextMonth()">next</Button>
+        <Button @click="prevMonth()"><font-awesome-icon icon="fa-solid fa-angle-left" /></Button>
+        <Button @click="goToToday()"><font-awesome-icon icon="fa-solid fa-calendar-day" /> Today</Button>
+        <Button @click="nextMonth()"><font-awesome-icon icon="fa-solid fa-angle-right" /></Button>
       </div>
     </div>
     <Month
@@ -106,13 +107,5 @@ html,
 body,
 #__nuxt {
   height: 100%;
-}
-body {
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.8);
-}
-.dark-mode body {
-  background-color: #222;
-  color: #fff;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
     <div
-      class="col-span-7 text-center flex gap-1 items-center px-4 text-2xl"
+      class="col-span-7 text-center flex gap-[0.5ch] items-center px-4 text-2xl"
       :class="[border, displayMonth]"
     >
-      <span class="hidden print:flex print:gap-1"><span class="font-bold">{{ month }}</span> {{ year }}</span>
+      <span class="hidden print:flex print:gap-[0.5ch]"><span class="font-bold">{{ month }}</span> {{ year }}</span>
       <slot></slot>
     </div>
     <div
