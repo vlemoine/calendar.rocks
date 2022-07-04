@@ -10,10 +10,11 @@
     <div
       v-for="(weekday, i) in weekdays"
       :key="i"
-      class="text-center"
+      class="grid place-items-center"
       :class="border"
     >
-      {{ abbrDay ? weekday.slice(0, 3) : weekday }}
+      <span :class="{'md:hidden':!abbrDay}">{{ weekday.slice(0, 3)}}</span>
+      <span class="hidden md:inline" :class="{'md:hidden':abbrDay}">{{ weekday }}</span>
     </div>
     <div
       v-for="(date, i) in dates"
