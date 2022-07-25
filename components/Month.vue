@@ -4,7 +4,9 @@
       class="col-span-7 text-center flex gap-[0.5ch] items-center px-4 text-2xl"
       :class="[border, displayMonth]"
     >
-      <span class="hidden print:flex print:gap-[0.5ch]"><span class="font-bold">{{ month }}</span> {{ year }}</span>
+      <span class="hidden print:flex print:gap-[0.5ch]"
+        ><span class="font-bold">{{ month }}</span> {{ year }}</span
+      >
       <slot></slot>
     </div>
     <div
@@ -13,13 +15,20 @@
       class="grid place-items-center"
       :class="border"
     >
-      <span :class="{'md:hidden':!abbrDay}">{{ weekday.slice(0, 3)}}</span>
-      <span class="hidden md:inline" :class="{'md:hidden':abbrDay}">{{ weekday }}</span>
+      <span
+        :class="{ 'md:hidden print:hidden': !abbrDay, 'print:inline': abbrDay }"
+        >{{ weekday.slice(0, 3) }}</span
+      >
+      <span
+        class="hidden md:inline"
+        :class="{ 'md:hidden print:hidden': abbrDay, 'print:inline': !abbrDay }"
+        >{{ weekday }}</span
+      >
     </div>
     <div
       v-for="(date, i) in dates"
       :key="i"
-      class="px-2 py-1 relative flex"
+      class="relative flex"
       :class="[
         border,
         text(i),
@@ -42,14 +51,34 @@
           (allDates && forceFive && i < 35)
         "
         :class="[
+          'absolute m-2',
           today(date),
           {
-            'absolute bottom-2': forceFive && i > 34,
+            'top-0 right-0': !forceFive || (forceFive && i < 35),
+            'bottom-0': forceFive && i > 34,
             'opacity-50': !date.current,
           },
         ]"
         >{{ date.date }}
       </span>
+      <svg
+        v-if="forceFive && i > 27 && i < 35 && dates[i + 7].current"
+        width="1"
+        height="1"
+        class="absolute h-full w-full top-0 left-0 split-top"
+        aria-hidden="true"
+      >
+        <rect width="100%" height="100%" fill="currentColor" />
+      </svg>
+      <svg
+        v-if="forceFive && i > 34 && date.current"
+        width="1"
+        height="1"
+        class="absolute h-full w-full top-0 left-0 split-bottom"
+        aria-hidden="true"
+      >
+        <rect width="100%" height="100%" fill="currentColor" />
+      </svg>
     </div>
   </div>
 </template>
@@ -142,9 +171,31 @@ export default {
     },
     today(date) {
       return date.obj.toDateString() === today.toDateString()
-        ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black aspect-square h-6 grid place-items-center -mr-1 rounded-full print:text-current"
+        ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black aspect-square h-6 grid place-items-center rounded-full print:text-current"
         : "";
     },
   },
 };
 </script>
+
+<style scoped>
+.split-top {
+  clip-path: polygon(
+    0 1px,
+    0 0,
+    1px 0,
+    calc(50% + 1px) 100%,
+    50% 100%,
+    calc(50% - 1px) 100%
+  );
+}
+.split-bottom {
+  clip-path: polygon(
+    calc(50% - 1px) 0,
+    calc(50% + 1px) 0,
+    100% calc(100% - 1px),
+    100% 100%,
+    calc(100% - 1px) 100%
+  );
+}
+</style>

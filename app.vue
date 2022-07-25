@@ -30,15 +30,15 @@
         aria-label="Calendar options"
         title="Calendar options"
         :class="{ '!bg-indigo-100 dark:!bg-indigo-900': options }"
-        ><font-awesome-icon icon="fa-solid fa-gear"
-      /></Button>
+        ><font-awesome-icon icon="fa-solid fa-gear" /> Options</Button
+      >
       <Button
         aria-label="Print"
         title="Print"
         @click="print()"
-        class="!bg-lime-400 dark:!bg-lime-600 aspect-square h-16 rounded-full fixed right-3 bottom-3 z-50 shadow-lg !p-0 md:static md:h-12"
-        ><font-awesome-icon icon="fa-solid fa-print"
-      /></Button>
+        :class="['!bg-lime-400 dark:!bg-lime-700']"
+        ><font-awesome-icon icon="fa-solid fa-print" /> Print</Button
+      >
     </div>
     <div
       id="Options"
@@ -63,16 +63,18 @@
         id="forceFive"
         v-model="forceFive"
       /><label for="forceFive">Force five week view</label>
-      <select
-        name="monthPos"
-        v-model="monthPos"
-        class="bg-transparent"
-        aria-label="Month position"
+      <span
+        ><label>Month position</label><select
+          name="monthPos"
+          v-model="monthPos"
+          class="bg-transparent"
+          aria-label="Month position"
+        >
+          <option v-for="(op, i) in monthPosOptions" :key="i" :value="op">
+            {{ op }}
+          </option>
+        </select></span
       >
-        <option v-for="(op, i) in monthPosOptions" :key="i" :value="op">
-          {{ op }}
-        </option>
-      </select>
     </div>
     <Month
       :date="date"
@@ -134,6 +136,9 @@ const date = computed(() => {
   d.setMonth(selectedMonth.value);
   return d;
 });
+const cls_cta =
+  "aspect-square h-16 rounded-full fixed right-3 bottom-3 z-50 shadow-lg";
+const cls_md = "md:static md:h-12";
 function nextMonth() {
   selectedMonth.value++;
   selectedYear.value = date.value.getFullYear();
