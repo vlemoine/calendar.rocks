@@ -62,7 +62,7 @@
         >{{ date.date }}
       </span>
       <svg
-        v-if="forceFive && i > 27 && i < 35 && dates[i + 7].current"
+        v-if="forceFive && i > 27 && i < 35 && dates[i + 7]?.current"
         width="1"
         height="1"
         class="absolute h-full w-full top-0 left-0 split-top"
@@ -166,10 +166,10 @@ export default {
     },
   },
   methods: {
-    text(i) {
+    text(i: number) {
       return this.forceFive && i > 34 ? "" : "items-start justify-end";
     },
-    today(date) {
+    today(date: any) {
       return date.obj.toDateString() === today.toDateString()
         ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black aspect-square h-6 grid place-items-center rounded-full print:text-current"
         : "";
