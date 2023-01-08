@@ -11,6 +11,16 @@
       "exceptions": {}
     },
     {
+      "name": "Epiphany",
+      "static": true,
+      "month": 0,
+      "date": 6,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
       "name": "Martin Luther King Jr. Day",
       "static": false,
       "month": 0,
@@ -71,6 +81,16 @@
       "exceptions": {}
     },
     {
+      "name": "International Women’s Day",
+      "static": true,
+      "month": 2,
+      "date": 8,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
       "name": "St. Patrick’s Day",
       "static": true,
       "month": 2,
@@ -97,6 +117,16 @@
       "date": 22,
       "day": null,
       "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Arbor Day",
+      "static": false,
+      "month": 3,
+      "date": null,
+      "day": 5,
+      "instance": -1,
       "observed": false,
       "exceptions": {}
     },
@@ -181,6 +211,16 @@
       "exceptions": {}
     },
     {
+      "name": "Helen Keller Day",
+      "static": true,
+      "month": 5,
+      "date": 27,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
       "name": "Independence Day",
       "static": true,
       "month": 6,
@@ -188,6 +228,26 @@
       "day": null,
       "instance": null,
       "observed": true,
+      "exceptions": {}
+    },
+    {
+      "name": "Parents’ Day",
+      "static": false,
+      "month": 6,
+      "date": null,
+      "day": 0,
+      "instance": 4,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Women’s Equality Day",
+      "static": true,
+      "month": 7,
+      "date": 26,
+      "day": null,
+      "instance": null,
+      "observed": false,
       "exceptions": {}
     },
     {
@@ -302,6 +362,16 @@
       "day": null,
       "instance": null,
       "observed": true,
+      "exceptions": {}
+    },
+    {
+      "name": "Kwanzaa Begins",
+      "static": true,
+      "month": 11,
+      "date": 26,
+      "day": null,
+      "instance": null,
+      "observed": false,
       "exceptions": {}
     },
     {
