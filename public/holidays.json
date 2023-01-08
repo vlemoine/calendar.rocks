@@ -1,0 +1,318 @@
+{
+  "holidays": [
+    {
+      "name": "New Year’s Day",
+      "static": true,
+      "month": 0,
+      "date": 1,
+      "weekday": null,
+      "instance": null,
+      "observed": true,
+      "exceptions": {}
+    },
+    {
+      "name": "Martin Luther King Jr. Day",
+      "static": false,
+      "month": 0,
+      "date": null,
+      "day": 1,
+      "instance": 3,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "First Day of Black History Month",
+      "static": true,
+      "month": 1,
+      "date": 1,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Groundhog Day",
+      "static": true,
+      "month": 1,
+      "date": 2,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Valentine’s Day",
+      "static": true,
+      "month": 1,
+      "date": 14,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Presidents’ Day",
+      "static": false,
+      "month": 1,
+      "date": null,
+      "day": 1,
+      "instance": 3,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "First Day of Women’s History Month",
+      "static": true,
+      "month": 2,
+      "date": 1,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "St. Patrick’s Day",
+      "static": true,
+      "month": 2,
+      "date": 17,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "April Fool’s Day",
+      "static": true,
+      "month": 3,
+      "date": 1,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Earth Day",
+      "static": true,
+      "month": 3,
+      "date": 22,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "First Day of Asian Pacific American Heritage Month",
+      "static": true,
+      "month": 4,
+      "date": 1,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Cinco de Mayo",
+      "static": true,
+      "month": 4,
+      "date": 5,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Mother’s Day",
+      "static": false,
+      "month": 4,
+      "date": null,
+      "day": 0,
+      "instance": 2,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Memorial Day",
+      "static": false,
+      "month": 4,
+      "date": null,
+      "day": 1,
+      "instance": -1,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "First Day of LGBTQ+ Pride Month",
+      "static": true,
+      "month": 5,
+      "date": 1,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Father’s Day",
+      "static": false,
+      "month": 5,
+      "date": null,
+      "day": 0,
+      "instance": 3,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Flag Day",
+      "static": true,
+      "month": 5,
+      "date": 14,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Juneteenth",
+      "static": true,
+      "month": 5,
+      "date": 19,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Independence Day",
+      "static": true,
+      "month": 6,
+      "date": 4,
+      "day": null,
+      "instance": null,
+      "observed": true,
+      "exceptions": {}
+    },
+    {
+      "name": "Labor Day",
+      "static": false,
+      "month": 8,
+      "date": null,
+      "day": 1,
+      "instance": 1,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "First Day of Hispanic Heritage Month",
+      "static": true,
+      "month": 8,
+      "date": 15,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Indigineous Peoples’ Day",
+      "static": false,
+      "month": 9,
+      "date": null,
+      "day": 1,
+      "instance": 2,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Halloween",
+      "static": true,
+      "month": 9,
+      "date": 31,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "First Day of American Indian Heritage Month",
+      "static": true,
+      "month": 10,
+      "date": 1,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Election Day",
+      "static": false,
+      "month": 10,
+      "date": null,
+      "day": 1,
+      "instance": 1,
+      "observed": false,
+      "exceptions": {
+        "add_day": 1
+      }
+    },
+    {
+      "name": "Veterans Day",
+      "static": true,
+      "month": 10,
+      "date": 11,
+      "day": null,
+      "instance": null,
+      "observed": true,
+      "exceptions": {}
+    },
+    {
+      "name": "Thanksgiving Day",
+      "static": false,
+      "month": 10,
+      "date": null,
+      "day": 4,
+      "instance": 4,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Native American Heritage Day",
+      "static": false,
+      "month": 10,
+      "date": null,
+      "day": 4,
+      "instance": 4,
+      "observed": false,
+      "exceptions": {
+        "add_day": 1
+      }
+    },
+    {
+      "name": "Christmas Eve",
+      "static": true,
+      "month": 11,
+      "date": 24,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    },
+    {
+      "name": "Christmas",
+      "static": true,
+      "month": 11,
+      "date": 25,
+      "day": null,
+      "instance": null,
+      "observed": true,
+      "exceptions": {}
+    },
+    {
+      "name": "New Year’s Eve",
+      "static": true,
+      "month": 11,
+      "date": 31,
+      "day": null,
+      "instance": null,
+      "observed": false,
+      "exceptions": {}
+    }
+  ]
+}
