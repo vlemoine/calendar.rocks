@@ -44,23 +44,30 @@
         },
       ]"
     >
-      <span
+      <template
         v-if="
           date.current ||
           (allDates && !forceFive) ||
           (allDates && forceFive && i < 35)
         "
-        :class="[
-          'absolute m-2',
-          today(date),
-          {
-            'top-0 right-0': !forceFive || (forceFive && i < 35),
-            'bottom-0': forceFive && i > 34,
-            'opacity-50': !date.current,
-          },
-        ]"
-        >{{ date.date }}
-      </span>
+      >
+        <span
+          :class="[
+            'absolute m-2 text-right leading-none',
+            {
+              'top-0 right-0': !forceFive || (forceFive && i < 35),
+              'bottom-0 !text-left': forceFive && i > 34,
+              'opacity-50': !date.current,
+            },
+          ]"
+          ><span :class="today(date)">{{ date.date }}</span
+          ><span v-if="holiday(date).length > 0" class="text-xs leading-none print:text-[8pt]"
+            ><template v-for="name in holiday(date)"
+              ><br />{{ name }}</template
+            ></span
+          >
+        </span>
+      </template>
       <svg
         v-if="forceFive && i > 27 && i < 35 && dates[i + 7]?.current"
         width="1"
@@ -84,6 +91,8 @@
 </template>
 
 <script lang="ts">
+import hldys from "~/public/holidays.json";
+const holidays = hldys.holidays;
 const today: Date = new Date();
 const weekdays: string[] = [
   "Sunday",
@@ -94,7 +103,6 @@ const weekdays: string[] = [
   "Friday",
   "Saturday",
 ];
-const options: object = { month: "long" };
 export default {
   props: {
     date: {
@@ -123,6 +131,7 @@ export default {
     return {
       border: "border border-current",
       weekdays: weekdays,
+      holidays: holidays,
     };
   },
   computed: {
@@ -152,7 +161,9 @@ export default {
       return slots;
     },
     month() {
-      return new Intl.DateTimeFormat("default", options).format(this.date);
+      const options: object = { month: "long" };
+      let d: any = this.date;
+      return new Intl.DateTimeFormat("default", options).format(d);
     },
     year() {
       return this.date.getFullYear();
@@ -171,8 +182,62 @@ export default {
     },
     today(date: any) {
       return date.obj.toDateString() === today.toDateString()
-        ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black aspect-square h-6 grid place-items-center rounded-full print:text-current"
+        ? "bg-indigo-600 text-white dark:bg-indigo-400 dark:text-black aspect-square h-6 inline-grid place-items-center rounded-full print:text-current"
         : "";
+    },
+    holiday(date: any) {
+      let h: string[] = [];
+      holidays.forEach((e) => {
+        if (e.static && e.date) {
+          let _date = e.date;
+          if (_date === date.date && e.month === date.obj.getMonth()) {
+            h.push(e.name);
+          }
+          if (e.observed) {
+            let holiday = new Date(this.year, e.month, _date);
+            let day = holiday.getDay();
+            let weekend = day % 6 === 0;
+            if (weekend) {
+              let offset = day === 0 ? 1 : day === 6 ? -1 : 0;
+              _date = _date + offset;
+              let _hldy = new Date(this.year, e.month, _date);
+              if (_hldy.toString() === date.obj.toString()) {
+                h.push(e.name + " (Observed)");
+              }
+            }
+          }
+          // trying to observe new years if it's on saturday, maybe I'll figure out a better way one day (but today ain't it)
+          if (
+            e.month === 11 &&
+            date.obj.getMonth() === 11 &&
+            date.date === 31 &&
+            e.date === 31 &&
+            date.obj.getDay() === 5
+          ) {
+            h.push("New Year’s Day (Observed)");
+          }
+        } else if (
+          e.month === date.obj.getMonth() &&
+          // e.day === date.obj.getDay() &&
+          e.instance !== null
+        ) {
+          let ex_day = e.exceptions?.add_day ? e.exceptions?.add_day : 0;
+          let findDate = this.dates.filter(
+            (f) =>
+              f.obj.getDay() === e.day &&
+              f.obj.getMonth() === this.date.getMonth()
+          );
+          let isDate =
+            findDate[
+              e.instance < 0 ? findDate.length + e.instance : e.instance - 1
+            ];
+          let _dex = isDate.obj.getDate() + ex_day;
+          if (date.date === _dex) {
+            h.push(e.name);
+          }
+        }
+      });
+      return h;
     },
   },
 };
