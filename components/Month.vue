@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import hldys from "~/public/holidays.json";
+import hldys from "~/src/holidays.json";
 const holidays = hldys.holidays;
 const today: Date = new Date();
 const weekdays: string[] = [
