@@ -1,7 +1,10 @@
 <template>
   <NuxtLayout>
     <Html lang="en"></Html>
-    <Head><Title>calendar.rocks</Title></Head>
+    <Head>
+      <Title>calendar.rocks</Title>
+      <Link rel="icon" :href="`favicon_${new Date().getDate()}.svg`"/>
+    </Head>
     <Body class="dark:bg-gray-900 text-black/80 dark:text-white"></Body>
     <h1 class="sr-only">{{ months[selectedMonth] }} {{ selectedYear }}</h1>
     <!-- Color mode: {{ $colorMode.value }} -->
