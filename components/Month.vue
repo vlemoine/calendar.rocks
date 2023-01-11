@@ -9,22 +9,7 @@
       >
       <slot></slot>
     </div>
-    <div
-      v-for="(weekday, i) in weekdays"
-      :key="i"
-      class="grid place-items-center"
-      :class="border"
-    >
-      <span
-        :class="{ 'md:hidden print:hidden': !abbrDay, 'print:inline': abbrDay }"
-        >{{ weekday.slice(0, 3) }}</span
-      >
-      <span
-        class="hidden md:inline"
-        :class="{ 'md:hidden print:hidden': abbrDay, 'print:inline': !abbrDay }"
-        >{{ weekday }}</span
-      >
-    </div>
+    <Weekday :abbrDay="abbrDay"></Weekday>
     <div
       v-for="(date, i) in dates"
       :key="i"
@@ -94,15 +79,6 @@
 import hldys from "~/src/holidays.json";
 const holidays = hldys.holidays;
 const today: Date = new Date();
-const weekdays: string[] = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
 export default {
   props: {
     date: {
@@ -130,7 +106,6 @@ export default {
   data() {
     return {
       border: "border border-current",
-      weekdays: weekdays,
       holidays: holidays,
     };
   },
