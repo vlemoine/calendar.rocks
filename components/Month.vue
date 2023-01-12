@@ -1,5 +1,6 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
+    <!-- <pre class="h-[200px] overflow-auto col-span-7">{{ dates }}</pre> -->
     <div
       class="col-span-7 text-center flex gap-[0.5ch] items-center px-4 text-2xl"
       :class="[border, displayMonth]"
@@ -9,7 +10,7 @@
       >
       <slot></slot>
     </div>
-    <Weekday :abbrDay="abbrDay"></Weekday>
+    <Weekday :abbrDay="abbrDay" :startMonday="startMonday"></Weekday>
     <div
       v-for="(date, i) in dates"
       :key="i"
@@ -46,7 +47,9 @@
             },
           ]"
           ><span :class="today(date)">{{ date.date }}</span
-          ><span v-if="holiday(date).length > 0" class="text-xs leading-none print:text-[8pt]"
+          ><span
+            v-if="holiday(date).length > 0"
+            class="text-xs leading-none print:text-[8pt]"
             ><template v-for="name in holiday(date)"
               ><br />{{ name }}</template
             ></span
@@ -102,6 +105,10 @@ export default {
       type: String,
       default: "center",
     },
+    startMonday: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -117,7 +124,13 @@ export default {
       let d = new Date(this.base);
       const month: number = new Date(this.base).getMonth();
       let slots: any[] = [];
-      for (let i = this.base.getDay(); i > 0; i--) {
+      // Get days to fill week
+      const ddd = this.startMonday
+        ? this.base.getDay() === 0
+          ? 6
+          : this.base.getDay() - 1
+        : this.base.getDay();
+      for (let i = ddd; i > 0; i--) {
         let s = new Date(d);
         s.setDate(s.getDate() - i);
         slots.push({ obj: s, date: s.getDate(), current: false });
@@ -127,8 +140,10 @@ export default {
         slots.push({ obj: s, date: s.getDate(), current: true });
         d.setDate(d.getDate() + 1);
       }
-      let q = d.getDay() - 1;
-      while (q > -1 && d.getDay() > q) {
+      const _dGetDay = this.startMonday ? d.getDay() === 0 ? 6 : d.getDay() - 1 : d.getDay();
+      const q = _dGetDay - 1;
+      // no, I can't reference _dGetDay here because it will crash
+      while (q > -1 && (this.startMonday ? d.getDay() === 0 ? 6 : d.getDay() - 1 : d.getDay()) > q) {
         let s = new Date(d);
         slots.push({ obj: s, date: s.getDate(), current: false });
         d.setDate(d.getDate() + 1);
