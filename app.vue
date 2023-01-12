@@ -66,6 +66,12 @@
         id="forceFive"
         v-model="forceFive"
       /><label for="forceFive">Force five week view</label>
+      <input
+        type="checkbox"
+        name="startMonday"
+        id="startMonday"
+        v-model="startMonday"
+      /><label for="startMonday">Start week on Monday</label>
       <span
         ><label>Month position</label><select
           name="monthPos"
@@ -85,6 +91,7 @@
       :abbrDay="abbrDay"
       :forceFive="forceFive"
       :monthPos="monthPos"
+      :startMonday="startMonday"
     >
       <select
         name="months"
@@ -132,6 +139,7 @@ const abbrDay = ref(false);
 const forceFive = ref(false);
 const monthPos = ref("center");
 const options = ref(false);
+const startMonday = ref(false);
 const date = computed(() => {
   let d = new Date();
   d.setDate(1);
