@@ -3,7 +3,7 @@
     <div
       v-for="(weekday, i) in weekdays"
       :key="i"
-      class="grid place-items-center order-0"
+      class="grid place-items-center"
       :class="[border, {'order-last': last(weekday)}]"
     >
       <span class="md:hidden print:hidden">{{ display(weekday, true) }}</span>

@@ -1,6 +1,5 @@
 <template>
   <div class="month grid grid-cols-7 h-full" :class="border">
-    <!-- <pre class="h-[200px] overflow-auto col-span-7">{{ dates }}</pre> -->
     <div
       class="col-span-7 text-center flex gap-[0.5ch] items-center px-4 text-2xl"
       :class="[border, displayMonth]"
